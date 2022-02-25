@@ -14,8 +14,8 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button button ;
-    TextView textView;
+    Button button,button2,button3 ;
+    TextView textView,textView2,textView3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,15 +23,54 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         button = findViewById(R.id.btn);
+        button2 =findViewById(R.id.btn2);
+        button3 =findViewById(R.id.btn3);
         textView =findViewById(R.id.txt);
+        textView2 =findViewById(R.id.txt2);
+        textView3 =findViewById(R.id.txt3);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Utils utils = new Utils();
-                new GetCustIdAsyncTask(utils.GET_CUST_ID,reqPramsFromGetCustId(), new GetCustIdAsyncTask.Callback() {
+                new GetCustIdAsyncTask(utils.CHECK_PHN_RST,reqPramsFromGetCustId(), new GetCustIdAsyncTask.Callback() {
                     @Override
                     public void OnSuccess(String data) {
                         textView.setText(data);
+                    }
+
+                    @Override
+                    public void OnFail(String msg) {
+
+                    }
+                }).execute();
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils utils  =new Utils();
+                new  GetCustIdAsyncTask(utils.GET_CUST_ID, reqPramsFromGetCustId(), new GetCustIdAsyncTask.Callback() {
+                    @Override
+                    public void OnSuccess(String data) {
+                        textView2.setText(data);
+                    }
+
+                    @Override
+                    public void OnFail(String msg) {
+
+                    }
+                }).execute();
+            }
+        });
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils utils = new Utils();
+                new GetCustIdAsyncTask(utils.CHECK_PHN_RST, reqPramsFromGetCustId(), new GetCustIdAsyncTask.Callback() {
+                    @Override
+                    public void OnSuccess(String data) {
+                        textView3.setText(data);
                     }
 
                     @Override
@@ -58,4 +97,3 @@ public class MainActivity extends AppCompatActivity {
         return jsonObject;
     }
 }
-
