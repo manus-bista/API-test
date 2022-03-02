@@ -7,28 +7,30 @@ import com.manush.apiworkpractice.utils.Utils;
 
 import org.json.JSONObject;
 
-public class GetCustIdAsyncTask extends AsyncTask<String, String, String> {
+public class CheckPhnRstAsyncTask extends AsyncTask<String,String,String> {
 
-    String urlPath2;
-    JSONObject jsonObject2;
-    Callback2 callback2;
+    String urlPath;
+    JSONObject jsonObject;
+    Callback callback;
 
-    public GetCustIdAsyncTask(String urlPath2, JSONObject jsonObject2, Callback2 callback2) {
-        this.urlPath2 = urlPath2;
-        this.jsonObject2 = jsonObject2;
-        this.callback2 = callback2;
+    public CheckPhnRstAsyncTask(String urlPath, JSONObject jsonObject, Callback callback ){
+        this.urlPath = urlPath;
+        this.jsonObject = jsonObject;
+        this.callback = callback;
+
     }
 
     @Override
     protected String doInBackground(String... strings) {
-            String responseData = null;
+        String responseData = null;
         try {
             SendOkHttpClientToApi sendOkHttpClientToApi = new SendOkHttpClientToApi();
             Utils utils = new Utils();
-            responseData = sendOkHttpClientToApi.SendHttpData2(urlPath2, jsonObject2);
-        } catch (Exception e) {
+            responseData = sendOkHttpClientToApi.SendHttpData(urlPath, jsonObject);
+        }catch (Exception e){
             e.printStackTrace();
         }
+
         return responseData;
     }
 
@@ -41,19 +43,16 @@ public class GetCustIdAsyncTask extends AsyncTask<String, String, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         try {
-            JSONObject jsonObject2 = new JSONObject(s);
-            callback2.OnSuccess(s);
-            System.out.println(jsonObject2);
-        } catch (Exception e) {
+            JSONObject jsonObject = new JSONObject(s);
+            callback.OnSuccess(s);
+            System.out.println(jsonObject);
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
-
-    public interface Callback2{
+    public interface Callback{
         void OnSuccess(String data);
 
         void OnFail(String msg);
     }
-
 }
-

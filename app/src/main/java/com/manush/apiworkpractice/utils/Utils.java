@@ -6,8 +6,12 @@ public class Utils {
 
     public String CHECK_PHN_RST = baseUrl + "checkphone" ;
 
-    private String baseUrl2 = "https://node.qpaysolutions.net/QPay.svc";
+    private  String baseUrl2 = "https://node.qpaysolutions.net/QPay.svc/";
 
-    public String GET_CUST_ID = baseUrl2 + "getcustid";
+    public final String  GET_CUST_ID = baseUrl2 + "getcustid";
+
+    private String baseurl3 = "https://node.qpaysolutions.net/QPay.svc/";
+
+    public String REG_CUST_INFO = baseurl3 + "registercustomerinfo";
 
 }
